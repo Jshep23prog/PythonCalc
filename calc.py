@@ -20,15 +20,15 @@ display.grid(row=1, columnspan = 6)
 #add 9 buttons with nested for loop
 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9] #get values from the array
 #counter increases to dynamically render button numbers
-counter = 1
+counter = 0
 for x in range(3):
     for y in range(3):
         button_text = numbers[counter]
-        button = Button(root, text = counter, width = 2, height = 2)
-        button.grid(row = x + 2, column = y) #add + 2 to row so it doesnt superimpose on entry field
+        button = Button(root, text = button_text, width = 2, height = 2, command = lambda text = button_text: get_number(text))
+        button.grid(row = x + 2, column = y) #add + 2 to row so it does not superimpose on entry field
         counter += 1
 #outside of loop, create a zero button
-button = Button(root, text = "0", width = 2, height = 2)
+button = Button(root, text = "0", width = 2, height = 2, command = lambda text = button_text: get_number(0)) #copy lambda func for our separate zero
 button.grid(row = 5, column = 1)
 
 #next add operations to the window add, subtract, multiply, division, pi, percentage, parenthesis, exponent, and square
