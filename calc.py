@@ -11,6 +11,12 @@ def get_number(num): #whenever button is clicked, it will be passed to the funct
     display.insert(i, num) # add to entry widget
     i += 1 #increment every time a button is clicked
 
+#similar function for operations
+def get_operand(operator):
+    global i #this will keep track of the index regardless of number or operand input
+    length = len(operator) #to handle operands over one length such as pi
+    display.insert(i, operator) # add to entry widget
+    i += length
 
 #add an input field using grid method
 display = Entry(root)
@@ -38,7 +44,8 @@ operations = ["+", "-", "*", "/", "*3.14", "%", "(", "**", ")", "**2"]
 for x in range(4):
     for y in range(3):
         if count < len(operations):
-            button = Button(root, text = operations[count],  width = 2, height = 2, highlightbackground="gray42")
+            button = Button(root, text = operations[count],  width = 2, height = 2, highlightbackground="gray42",
+                            command = lambda text = operations[count]: get_operand(text))
             count += 1
             button.grid(row = x + 2, column = y + 3) #column + 3 to put operands on the side
 #keep the window running with mainloop function on the root object
