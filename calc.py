@@ -40,7 +40,16 @@ def calculate():
 display = Entry(root)
 display.grid(row=1, columnspan = 6)
 
-
+#create undo function
+def undo():
+    entire_string = display.get()
+    #conditional logic for empty or filled entry
+    if len(entire_string):
+       new_string = entire_string[:-1] #slice off end
+       clear_all()
+       display.insert(0, new_string)
+    else: clear_all()
+    display.insert(0, "")
 #add 9 buttons with nested for loop
 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9] #get values from the array
 #counter increases to dynamically render button numbers
@@ -70,5 +79,8 @@ for x in range(4):
 #add the All clear button and equals
 button = Button(root, text = "AC", width = 2, height = 2, command = clear_all).grid(row = 5, column = 0)
 button = Button(root, text = "=", width = 2, height = 2, command = calculate).grid(row = 5, column = 2)
+#add delete one character button
+button = Button(root, text = "<-", width = 2, height = 2, highlightbackground="gray42",
+                command = lambda :undo()).grid(row = 5, column = 4)
 #keep the window running with mainloop function on the root object
 root.mainloop()
