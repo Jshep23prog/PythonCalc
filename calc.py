@@ -1,6 +1,7 @@
 #import all classes/functions from tkinter library
 from tkinter import *
-
+#import abstract syntax three
+import ast
 #create window object
 root = Tk() #instance of the Tk class
 
@@ -18,6 +19,23 @@ def get_operand(operator):
     display.insert(i, operator) # add to entry widget
     i += length
 
+#create a clear all function
+def clear_all():
+    display.delete(0, END) # clears input and resets index
+
+#create calculate function
+def calculate():
+    #extract information in entry widget with get
+    entire_string = display.get()
+    try:
+        node = ast.parse(entire_string, mode = "eval")
+        result = eval(compile(node, "<string>", "eval"))
+       #clear out entire entry widget
+        clear_all()
+        display.insert(0, result)
+    except Exception:
+        clear_all()
+        display.insert(0, "Error")
 #add an input field using grid method
 display = Entry(root)
 display.grid(row=1, columnspan = 6)
@@ -48,5 +66,9 @@ for x in range(4):
                             command = lambda text = operations[count]: get_operand(text))
             count += 1
             button.grid(row = x + 2, column = y + 3) #column + 3 to put operands on the side
+
+#add the All clear button and equals
+button = Button(root, text = "AC", width = 2, height = 2, command = clear_all).grid(row = 5, column = 0)
+button = Button(root, text = "=", width = 2, height = 2, command = calculate).grid(row = 5, column = 2)
 #keep the window running with mainloop function on the root object
 root.mainloop()
