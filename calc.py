@@ -4,7 +4,7 @@ from tkinter import *
 import ast
 #create window object
 root = Tk() #instance of the Tk class
-
+root.title("James' Python Calculator")
 #write the function that adds text to the entry field
 i = 0
 def get_number(num): #whenever button is clicked, it will be passed to the function
