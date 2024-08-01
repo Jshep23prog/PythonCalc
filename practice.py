@@ -36,6 +36,16 @@ def calculate():
     clear_all()
     display.insert(0, "Flagrant System Error")
 
+#backspace function
+def undo():
+  entire_string = display.get()
+  if len(entire_string):
+    new_string = entire_string[:-1]
+    clear_all()
+    display.insert(0, new_string)
+  else: clear_all
+  display.insert(0, "")
+
 #entry field and grid display
 display = Entry(root)
 display.grid(row = 1, columnspan = 6)
@@ -58,6 +68,8 @@ button.grid(row = 5, column = 1)
 button = Button(root, text = "AC", width = 2, height = 2, command = clear_all).grid (row = 5, column = 0)
 
 button = Button(root, text = "=", width = 2, height = 2, command = calculate).grid (row = 5, column = 2)
+
+button = Button(root, text = "<-", width = 2, height = 2, command = lambda: undo()).grid (row = 5, column = 4)
 #add operands
 op_count = 0
 operations = ["+", "-", "*", "/", "*3.14", "%", "(", "**", ")", "**2"]
