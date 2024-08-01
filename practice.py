@@ -20,6 +20,22 @@ def get_operands(op):
   display.insert(i, op)
   i += length
 
+#write all clear function
+def clear_all():
+  display.delete(0, END)
+
+#write calculate function
+def calculate():
+  entire_string = display.get()
+  try:
+    node = ast.parse(entire_string, mode = "eval")
+    result = eval(compile(node, "<string>", "eval"))
+    clear_all()
+    display.insert(0, result)
+  except Exception:
+    clear_all()
+    display.insert(0, "Flagrant System Error")
+
 #entry field and grid display
 display = Entry(root)
 display.grid(row = 1, columnspan = 6)
@@ -38,6 +54,10 @@ for x in range(3):
 button = Button(root, text = "0", width = 2, height = 2, command = lambda text = button_text: get_number(0))
 button.grid(row = 5, column = 1)
 
+# need AC, = and backspace
+button = Button(root, text = "AC", width = 2, height = 2, command = clear_all).grid (row = 5, column = 0)
+
+button = Button(root, text = "=", width = 2, height = 2, command = calculate).grid (row = 5, column = 2)
 #add operands
 op_count = 0
 operations = ["+", "-", "*", "/", "*3.14", "%", "(", "**", ")", "**2"]
