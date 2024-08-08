@@ -73,8 +73,10 @@ button = Button(root, text = "<-", width = 2, height = 2, command = lambda: undo
 #add operands
 op_count = 0
 operations = ["+", "-", "*", "/", "*3.14", "%", "(", "**", ")", "**2"]
+#nested for loop
 for x in range(4):
   for y in range(3):
+    #logic for pressing on buttons
     if op_count < len(operations):
       button = Button(root, text = operations[op_count], width = 2, height = 2, command = lambda text = operations[op_count]: get_operands(text))
       op_count += 1
